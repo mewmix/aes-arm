@@ -1,0 +1,17 @@
+Python data key:
+a87ae244ac434ea4bfefc0e80f9f1c3da8541c4941741d0837d59b38b8dcb392
+
+Python tweak key:
+1ba8bb1561bc7c1f579f0e8f7af74412809039f3832738a59eb5c7dc7f8b1365
+
+Python IV:
+ed1084e74d0d41a406e7169e4551649d
+
+Python ciphertext:
+e700d5b95968abc0277ce2c8082b2593f5973f7e86c5d8faa24d296c4db18ceb01ee9f705013a1e5debf3c476f0f603e66aa35955355c7a4c078e7637a32b70425f94dc665dd6fa5fba1ff129e7df021654e3001e1e7338474c68ca4418d5a3677f734133fbd5a3303bfa6c7590823c18aca3bb99be14cf85ec2b0a04c15097f
+Traceback (most recent call last):
+  File "/Users/him/Repos/aes-asm/xts_kat.py", line 83, in <module>
+    main()
+  File "/Users/him/Repos/aes-asm/xts_kat.py", line 76, in main
+    assert ct_py == ct_c, "CT mismatch"
+AssertionError: CT mismatch

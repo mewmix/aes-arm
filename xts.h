@@ -7,9 +7,14 @@
 extern "C" {
 #endif
 
-// Pre-expanded roundkeys: 15 round keys for AES-256 (Nr=14, Nr+1=15)
+enum {
+    AES256_ROUNDS = 14,
+    AES256_ROUND_KEYS = AES256_ROUNDS + 1, // 15 round keys
+};
+
 typedef struct {
-    uint8_t rk[15][16];
+    uint8_t enc[AES256_ROUND_KEYS][16];
+    uint8_t dec[AES256_ROUND_KEYS][16];
 } aes256_rkeys;
 
 // Expand a 256-bit key into 15 round keys (portable C, not shown here)
@@ -17,6 +22,9 @@ void aes256_expand_keys(const uint8_t key[32], aes256_rkeys* out);
 
 // AES-256 encrypt one 16B block using ARMv8 Crypto (AESE/AESMC).
 void aes256_encrypt_block_armv8(const aes256_rkeys* rk, const uint8_t in[16], uint8_t out[16]);
+
+// AES-256 decrypt one 16B block using ARMv8 Crypto (AESD/AESIMC).
+void aes256_decrypt_block_armv8(const aes256_rkeys* rk, const uint8_t in[16], uint8_t out[16]);
 
 // XTS encrypt (no ciphertext stealing). length must be multiple of 16.
 // data_key and tweak_key are independent 256-bit keys (XTS-256).
