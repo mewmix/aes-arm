@@ -15,7 +15,7 @@ lib.aes_xts256_decrypt_armv8.argtypes = [u8_p,u8_p,u8_p,u8_p,u8_p,ctypes.c_size_
 lib.aes_xts256_decrypt_armv8.restype  = ctypes.c_int
 
 def xts_pyca_enc(dk, tk, iv, pt):
-    key = dk + tk  # PyCA expects concatenated data||tweak key (64B)
+    key = dk + tk
     cipher = Cipher(algorithms.AES(key), modes.XTS(iv), backend=default_backend())
     enc = cipher.encryptor()
     return enc.update(pt) + enc.finalize()
