@@ -6,6 +6,15 @@ I’m giving you:
 * A correct **XTS driver** (tweak derivation + GF(2¹²⁸) ×2 per block) for buffers that are multiples of 16 bytes. (Ciphertext stealing TODO noted.)
 * A **PyCA KAT script** to verify byte-for-byte.
 
+## Build & Verify (Apple silicon)
+
+```
+make              # compiles the C + ARMv8 assembly into libxts.so
+python3 xts_kat.py  # runs the PyCA-backed known-answer test harness
+```
+
+The script prints a single `XTS-256 KAT OK` line when the library matches PyCA’s AES-XTS reference.
+
 ---
 
 # 1) Header (stable C ABI)
@@ -293,4 +302,3 @@ python3 xts_kat.py
 * Microbench (cycles/byte) and alignment/prefetch polish.
 
 If you want, I’ll drop the **AES-256 key expansion (portable C)** and the **decrypt kernel** next so your KAT will pass immediately.
-
