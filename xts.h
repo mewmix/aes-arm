@@ -9,12 +9,13 @@ extern "C" {
 
 enum {
     AES256_ROUNDS = 14,
-    AES256_ROUND_KEYS = AES256_ROUNDS + 1, // 15 round keys
+    AES256_ROUND_KEYS = AES256_ROUNDS + 1, // 15 round keys used by the classic C flow
+    AES256_HW_ROUND_KEYS = AES256_ROUND_KEYS + 1, // extra whitening key for AESE/AESD
 };
 
 typedef struct {
-    uint8_t enc[AES256_ROUND_KEYS][16];
-    uint8_t dec[AES256_ROUND_KEYS][16];
+    uint8_t enc[AES256_HW_ROUND_KEYS][16];
+    uint8_t dec[AES256_HW_ROUND_KEYS][16];
 } aes256_rkeys;
 
 // Expand a 256-bit key into 15 round keys (portable C, not shown here)
